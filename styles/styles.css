@@ -1,0 +1,789 @@
+/* =========================================
+   BASE STYLES & VARIABLES
+   ========================================= */
+:root {
+    --bg-dark: #121212;
+    --bg-card: #252525;
+    --bg-nav: rgba(26, 26, 26, 0.95);
+    --accent: #ffca28;
+    --text-main: #f4f4f4;
+    --text-muted: #aaa;
+    --transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    color: var(--text-main); 
+    line-height: 1.6; 
+    background-color: var(--bg-dark);
+    overflow-x: hidden; 
+}
+
+/* =========================================
+   NAVIGATION (Shared)
+   ========================================= */
+nav { 
+    background: var(--bg-nav); 
+    padding: 15px 10%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 3px solid var(--accent);
+    backdrop-filter: blur(10px);
+}
+
+.logo { 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    color: var(--accent); 
+    text-decoration: none;
+}
+
+/* Desktop Menu */
+nav ul { 
+    display: flex; 
+    list-style: none; 
+}
+
+nav ul li { 
+    margin-left: 20px; 
+}
+
+nav ul li a { 
+    text-decoration: none; 
+    color: #fff; 
+    font-weight: 500; 
+    transition: var(--transition); 
+    font-size: 0.85rem; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav ul li a i {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+.aktip {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: underline;
+}
+nav ul li a:hover { color: var(--accent); }
+
+/* Hamburger Menu Toggle */
+.menu-toggle {
+    display: none; /* Sembunyi di desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--accent);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 992px) {
+    nav { padding: 15px 5%; }
+    
+    .menu-toggle {
+        display: flex; /* Muncul di mobile */
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Sembunyi di kanan */
+        height: 100vh;
+        width: 250px; /* Lebar sidebar menu */
+        background: rgba(18, 18, 18, 0.98);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 80px 30px;
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        border-left: 2px solid var(--accent);
+    }
+
+    /* Munculkan menu saat class 'active' ditambah oleh JS */
+    nav ul.active {
+        right: 0;
+    }
+
+    nav ul li {
+        margin: 15px 0;
+        width: 100%;
+    }
+
+    nav ul li a {
+        font-size: 1.1rem;
+        width: 100%;
+    }
+
+    /* Animasi Hamburger jadi X */
+    #mobile-menu.is-active .bar:nth-child(2) { opacity: 0; }
+    #mobile-menu.is-active .bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    #mobile-menu.is-active .bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+}
+/* =========================================
+   HERO SECTION (Home Page)
+   ========================================= */
+.hero { 
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('logo/gambar1.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; margin-bottom: 10px; color: var(--accent); }
+.hero p { font-size: 1.1rem; margin-bottom: 30px; max-width: 600px; color: #ccc; }
+
+/* Buttons */
+.btn-group { display: flex; gap: 15px; }
+.btn { 
+    padding: 12px 30px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-weight: 600; 
+    transition: var(--transition); 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.btn-primary { background: var(--accent); color: #121212; }
+.btn-outline { border: 2px solid var(--accent); color: var(--accent); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255,202,40,0.3); }
+.btn-e-recruitment { background: rgba(42, 42, 42, 0.578); color: #2ecc71; border: 2px solid #2ecc71; }
+.btn-e-recruitment:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(40, 255, 79, 0.3); }
+/* =========================================
+   SERVICES (Home Page Cards)
+   ========================================= */
+.services { padding: 80px 10%; background: #1a1a1a; text-align: center; }
+.services h2 { margin-bottom: 50px; font-size: 2.2rem; font-family: 'Montserrat', sans-serif; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.card { 
+    background: var(--bg-card); 
+    padding: 40px 30px; 
+    border-radius: 12px; 
+    transition: var(--transition); 
+    border: 1px solid #333;
+}
+
+.card:hover { border-color: var(--accent); background: #2d2d2d; transform: translateY(-5px); }
+.card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: block; }
+.card h3 { margin-bottom: 15px; font-size: 1.4rem; color: #fff; }
+.card p { color: var(--text-muted); font-size: 0.9rem; }
+
+.erec { padding: 80px 10%; background: #1a1a1a; text-align: center; border-top: #363636 1px solid;}
+.erec h2 { margin-bottom: 50px; font-size: 2.2rem; font-family: 'Montserrat', sans-serif; color: var(--accent);}
+/* =========================================
+   LINK TREE SPECIFIC (Mobile Optimized)
+   ========================================= */
+.linktree-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 40px 20px;
+}
+
+.lt-container { width: 100%; max-width: 450px; text-align: center; }
+
+.lt-profile { margin-bottom: 30px; }
+.lt-profile-img {
+    width: 100px; height: 100px;
+    background: var(--bg-card);
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 3rem; color: var(--accent);
+}
+
+.lt-links { display: flex; flex-direction: column; gap: 15px; }
+
+.lt-link-card {
+    background: var(--bg-card);
+    padding: 18px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    transition: var(--transition);
+}
+
+.lt-link-card i:first-child { width: 30px; color: var(--accent); font-size: 1.3rem; text-align: left; }
+.lt-link-text { flex-grow: 1; text-align: center; }
+
+.lt-link-card:hover {
+    transform: scale(1.03);
+    border-color: var(--accent);
+    box-shadow: 0 5px 20px rgba(255, 202, 40, 0.2);
+}
+/* =========================================
+   TEAM SECTION
+   ========================================= */
+.team-section {
+    padding: 80px 10%;
+    text-align: center;
+    background-color: var(--bg-dark);
+}
+
+.team-section h2 {
+    margin-bottom: 50px;
+    font-size: 2.2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.team-section h2 span {
+    color: var(--accent);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.team-card {
+    background: var(--bg-card);
+    padding: 30px 20px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    transition: var(--transition);
+}
+
+.team-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-10px);
+}
+
+.member-icon {
+    width: 70px;
+    height: 70px;
+    background: #333;
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    margin: 0 auto 20px;
+    transition: var(--transition);
+}
+
+.team-card:hover .member-icon {
+    background: var(--accent);
+    color: #121212;
+}
+
+.team-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.team-card .role {
+    display: block;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.team-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.team-card:nth-child(1) .member-icon, 
+.team-card:nth-child(2) .member-icon { border: 2px solid #3498db; } /* Developer - Blue tint */
+
+.team-card:nth-child(3) .member-icon, 
+.team-card:nth-child(4) .member-icon { border: 2px solid #e67e22; } /* Designer - Orange tint */
+
+.team-card:nth-child(5) .member-icon, 
+.team-card:nth-child(6) .member-icon { border: 2px solid #2ecc71; } /* ICT - Green tint */
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom di HP/Tablet */
+    }
+}
+
+@media (max-width: 480px) {
+    .team-grid {
+        grid-template-columns: 1fr; /* 1 kolom di HP kecil */
+    }
+}
+
+/* =========================================
+   ORGANIZATION TREE CSS
+   ========================================= */
+.org-structure {
+    padding: 40px 20px;
+    background: var(--bg-dark);
+    text-align: center;
+    width: 100%;
+    overflow-x: auto; /* Paksa scroll hanya di dalam box ini saja */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hilangkan Scale 120% di Mobile karena merusak layout */
+@media (max-width: 768px) {
+    .org-structure {
+        scale: 100%; /* Kembalikan ke normal agar tidak overlap keluar layar */
+    }
+    .tree {
+        min-width: 800px; /* Biarkan dia lebar, tapi user scroll di dalam container */
+    }
+}
+
+.tree {
+    display: inline-block;
+    min-width: 1000px; /* Menjaga struktur tetap rapi */
+}
+
+.tree ul {
+    padding-top: 20px; 
+    position: relative;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+}
+
+.tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+    transition: all 0.5s;
+}
+
+/* Membuat Garis Horizontal Penghubung */
+.tree li::before, .tree li::after {
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: 2px solid #444;
+    width: 50%; height: 20px;
+}
+.tree li::after {
+    right: auto; left: 50%;
+    border-left: 2px solid #444;
+}
+
+/* Menghilangkan garis pada elemen tunggal/ujung */
+.tree li:only-child::after, .tree li:only-child::before { display: none; }
+.tree li:only-child { padding-top: 0; }
+.tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+.tree li:last-child::before { border-right: 2px solid #444; border-radius: 0 5px 0 0; }
+.tree li:first-child::after { border-radius: 5px 0 0 0; }
+
+/* Garis Vertikal Turun dari Parent */
+.tree ul ul::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 2px solid #444;
+    width: 0; height: 20px;
+}
+
+/* Gaya Kotak (Node) */
+.node {
+    border: 1px solid #444;
+    padding: 15px;
+    display: inline-block;
+    border-radius: 8px;
+    background: var(--bg-card);
+    color: white;
+    min-width: 120px;
+    transition: var(--transition);
+}
+
+.node i { color: var(--accent); margin-bottom: 8px; font-size: 1.2rem; display: block; }
+.node p { font-weight: 600; font-size: 0.9rem; margin: 0; }
+.node span { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Gaya Khusus Pemilik */
+.owners-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.node.owner {
+    border: 2px solid var(--accent);
+    background: rgba(255, 202, 40, 0.05);
+    min-width: 150px;
+}
+/* Mengatur agar daftar anggota tidak memanjang ke samping */
+.member-list-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr); /* Bagi jadi 2 kolom */
+    gap: 10px;
+    padding-top: 20px !important;
+    min-width: 300px; /* Batasi lebar area */
+}
+
+/* Hilangkan garis alur untuk anggota individual agar tidak berantakan */
+.member-list-grid li::before, 
+.member-list-grid li::after {
+    display: none !important;
+}
+
+.member-list-grid li {
+    padding: 0 !important;
+}
+
+/* Penyesuaian Node Mini agar lebih rapat */
+.node.mini {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* Kotak utama yang menampung daftar staff */
+.staff-container {
+    min-width: 350px; /* Lebar kotak staff agar tidak terlalu sempit */
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px dashed #444; /* Pembeda dengan node utama */
+}
+
+/* Grid nama di dalam kotak staff */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Tetap 2 kolom */
+    gap: 8px;
+}
+
+.staff-grid span {
+    display: block;
+    background: #252525;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px solid #333;
+    text-align: center;
+}
+.staff-grid span:hover {
+    display: block;
+    background: #252525;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    text-align: center;
+}
+
+/* Menjaga garis vertikal tetap lurus ke kotak staff */
+.tree li ul li .staff-container::before {
+    content: '';
+    position: absolute; 
+    top: -20px; 
+    left: 50%;
+    border-left: 2px solid #444;
+    width: 0; 
+    height: 20px;
+}
+.node.owner i { font-size: 1.5rem; }
+
+/* Node Kecil untuk Anggota */
+.node.mini {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    background: #1a1a1a;
+}
+
+/* Hover Effect */
+.node:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 202, 40, 0.1);
+}
+
+/* Container Avatar */
+.member-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Membuat gambar bulat */
+    background: #333;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+/* Ikon Kecil di pojok Avatar */
+.role-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--accent);
+    color: #121212;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    border: 2px solid var(--bg-card);
+}
+/* =========================================
+   TEAM SECTION AVATAR STYLE
+   ========================================= */
+.team-section {
+    padding: 80px 10%;
+    text-align: center;
+    background-color: var(--bg-dark);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.team-card {
+    background: var(--bg-card);
+    padding: 40px 20px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.team-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+/* Container Avatar Bulat */
+.member-avatar {
+    width: 120px; /* Ukuran container */
+    height: 120px;
+    margin: 0 auto 20px;
+    position: relative; /* Penting untuk posisi ikon peran */
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Membuat gambar jadi bulat */
+    object-fit: cover; /* Memastikan gambar tidak gepeng */
+    border: 4px solid var(--accent); /* Border kuning aksen */
+    background: #2a2a2a; /* Warna latar jika gambar gagal muat */
+    transition: var(--transition);
+}
+
+/* Ikon Peran Kecil di Pojok */
+.role-icon {
+    position: absolute;
+    bottom: 5px; /* Sedikit naik dari paling bawah */
+    right: 5px; /* Sedikit masuk dari paling kanan */
+    width: 35px;
+    height: 35px;
+    background: var(--accent);
+    color: #121212;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border: 3px solid var(--bg-card); /* Border warna background agar terpisah */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.team-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.team-card .role {
+    display: block;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.team-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Hover Effect pada Avatar */
+.team-card:hover .member-avatar img {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 202, 40, 0.3);
+}
+
+.team-card:hover .member-avatar img {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 202, 40, 0.4);
+}
+
+/* =========================================
+   SHOWCASE SECTION (MODIFIED FOR SLIDER)
+   ========================================= */
+.showcase {
+    padding: 80px 10%;
+    background-color: #1a1a1a; 
+    border-top: #363636 1px solid;
+    overflow: hidden; /* Mencegah item meluap keluar section */
+}
+
+.showcase h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px;
+}
+
+.showcase h2 span { color: var(--accent); }
+
+/* Container utama diubah jadi Flex untuk slider */
+.showcase-grid {
+    display: flex; 
+    overflow-x: auto; /* Aktifkan scroll horizontal */
+    gap: 20px;
+    padding: 20px 5px;
+    scroll-snap-type: x mandatory; /* Snap effect saat geser */
+    scrollbar-width: none; /* Sembunyikan scrollbar Firefox */
+    cursor: grab;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
+}
+
+/* Sembunyikan scrollbar Chrome/Safari */
+.showcase-grid::-webkit-scrollbar {
+    display: none; 
+}
+
+.showcase-grid:active {
+    cursor: grabbing;
+}
+
+.showcase-item {
+    flex: 0 0 350px; /* Lebar tetap untuk setiap slide */
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 250px;
+    border: 1px solid #333;
+    scroll-snap-align: start; /* Berhenti tepat di awal item */
+    user-select: none;
+}
+
+.showcase-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    pointer-events: none; /* Agar tidak mengganggu drag mouse */
+}
+
+/* Overlay tetap sama seperti desainmu */
+.showcase-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.showcase-content {
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.showcase-content h3 {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.showcase-content p {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+/* Hover States */
+.showcase-item:hover img {
+    transform: scale(1.1);
+}
+
+.showcase-item:hover .showcase-overlay {
+    opacity: 1;
+}
+
+.showcase-item:hover .showcase-content {
+    transform: translateY(0);
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .showcase { padding: 50px 5%; }
+    .showcase-item {
+        flex: 0 0 85%; /* Lebih lebar di HP agar terlihat seperti slider */
+    }
+}
+/* =========================================
+   FOOTER (Shared)
+   ========================================= */
+footer { background: #0b0b0b; color: #666; text-align: center; padding: 40px 0; border-top: 1px solid #222; }
+.social-links { margin-bottom: 20px; }
+.social-links a { color: #fff; margin: 0 10px; font-size: 1.5rem; transition: var(--transition); }
+.social-links a:hover { color: var(--accent); }
+.copyright { font-size: 0.75rem; letter-spacing: 1px; }

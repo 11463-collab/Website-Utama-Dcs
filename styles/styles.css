@@ -21,7 +21,8 @@ body {
     font-family: 'Poppins', sans-serif; 
     color: var(--text-main); 
     line-height: 1.6; 
-    background-color: var(--bg-dark); 
+    background-color: var(--bg-dark);
+    overflow-x: hidden; 
 }
 
 /* =========================================
@@ -579,36 +580,54 @@ nav ul li a:hover { color: var(--accent); }
 }
 
 /* =========================================
-   SHOWCASE SECTION
-   ========================================= */
+   SHOWCASE SECTION (MODIFIED FOR SLIDER)
+   ========================================= */
 .showcase {
     padding: 80px 10%;
     background-color: #1a1a1a; 
     border-top: #363636 1px solid;
+    overflow: hidden; /* Mencegah item meluap keluar section */
 }
 
 .showcase h2 {
     text-align: center;
     font-size: 2.2rem;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .showcase h2 span { color: var(--accent); }
 
+/* Container utama diubah jadi Flex untuk slider */
 .showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex; 
+    overflow-x: auto; /* Aktifkan scroll horizontal */
     gap: 20px;
+    padding: 20px 5px;
+    scroll-snap-type: x mandatory; /* Snap effect saat geser */
+    scrollbar-width: none; /* Sembunyikan scrollbar Firefox */
+    cursor: grab;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
+}
+
+/* Sembunyikan scrollbar Chrome/Safari */
+.showcase-grid::-webkit-scrollbar {
+    display: none; 
+}
+
+.showcase-grid:active {
+    cursor: grabbing;
 }
 
 .showcase-item {
+    flex: 0 0 350px; /* Lebar tetap untuk setiap slide */
     position: relative;
     border-radius: 12px;
     overflow: hidden;
     height: 250px;
     border: 1px solid #333;
-    cursor: pointer;
+    scroll-snap-align: start; /* Berhenti tepat di awal item */
+    user-select: none;
 }
 
 .showcase-item img {
@@ -616,9 +635,10 @@ nav ul li a:hover { color: var(--accent); }
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    pointer-events: none; /* Agar tidak mengganggu drag mouse */
 }
 
-/* Overlay Efek Gelap saat Hover */
+/* Overlay tetap sama seperti desainmu */
 .showcase-overlay {
     position: absolute;
     top: 0;
@@ -662,8 +682,12 @@ nav ul li a:hover { color: var(--accent); }
     transform: translateY(0);
 }
 
+/* Responsif Mobile */
 @media (max-width: 768px) {
     .showcase { padding: 50px 5%; }
+    .showcase-item {
+        flex: 0 0 85%; /* Lebih lebar di HP agar terlihat seperti slider */
+    }
 }
 /* =========================================
    FOOTER (Shared)

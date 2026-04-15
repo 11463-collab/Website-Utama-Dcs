@@ -124,11 +124,13 @@ nav ul li a:hover { color: var(--accent); }
         transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         box-shadow: -5px 0 15px rgba(0,0,0,0.5);
         border-left: 2px solid var(--accent);
+        display: none; /* Sembunyi default, akan diubah ke flex saat aktif */
     }
 
     /* Munculkan menu saat class 'active' ditambah oleh JS */
     nav ul.active {
         right: 0;
+        display: flex;
     }
 
     nav ul li {

@@ -152,7 +152,7 @@ nav ul li a:hover { color: var(--accent); }
    HERO SECTION (Home Page)
    ========================================= */
 .hero { 
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('logo/gambar1.png') no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/logo/gambar1.png') no-repeat;
     background-size: cover;
     background-position: center;
     height: 85vh;

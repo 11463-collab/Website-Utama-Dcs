@@ -14,7 +14,7 @@
 * { 
     margin: 0; 
     padding: 0; 
-    box-sizing: border-box; 
+    box-sizing: inherit; 
 }
 
 body { 
@@ -42,7 +42,7 @@ nav {
     backdrop-filter: blur(10px);
 }
 
-.logo { 
+.logo {
     font-family: 'Montserrat', sans-serif; 
     font-size: 1.3rem; 
     font-weight: 700; 
@@ -51,16 +51,16 @@ nav {
 }
 
 /* Desktop Menu */
-nav ul { 
+nav ul {
     display: flex; 
     list-style: none; 
 }
 
-nav ul li { 
+nav ul li {
     margin-left: 20px; 
 }
 
-nav ul li a { 
+nav ul li a {
     text-decoration: none; 
     color: #fff; 
     font-weight: 500; 
@@ -149,16 +149,42 @@ nav ul li a:hover { color: var(--accent); }
    HERO SECTION (Home Page)
    ========================================= */
 .hero { 
+    /* Menggunakan background-attachment: scroll agar lebih stabil di browser mobile */
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('logo/gambar1.png') no-repeat;
     background-size: cover;
     background-position: center;
+    
+    /* Gunakan min-height agar saat konten bertambah di HP, box tidak gepeng */
     height: 85vh;
+    min-height: 500px; 
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 0 20px;
+    
+    /* Mencegah gambar 'melompat' saat bar navigasi browser HP muncul/hilang */
+    position: relative;
+    width: 100%;
+}
+
+/* KHUSUS MOBILE */
+@media (max-width: 768px) {
+    .hero {
+        /* Mengubah posisi background agar fokus ke tengah gambar saat layar sempit */
+        background-position: center center;
+        
+        /* Jika gambar utamamu objeknya di tengah, ini akan sangat membantu */
+        height: 70vh; /* Sedikit lebih pendek di HP agar user tahu ada konten di bawahnya */
+        min-height: 400px;
+    }
+
+    .hero h1 {
+        font-size: 2rem; /* Kecilkan ukuran teks agar tidak memenuhi layar */
+        line-height: 1.2;
+    }
 }
 
 .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; margin-bottom: 10px; color: var(--accent); }

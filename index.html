@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Double Coupler Studio | Roblox Railworks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Double Coupler Studio | Railworks</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -175,6 +175,7 @@
                                 <li><div class="node mini">Abi_ok245I</div></li>
                                 <li><div class="node mini">Srinanti197</div></li>
                                 <li><div class="node mini">RFXAVIATON</div></li>
+                                <li><div class="node mini">MitKenji1240</div></li>
                             </ul>
                         </li>
                         <li>
@@ -212,7 +213,6 @@
                                             <span>bagusmc6</span>
                                             <span>altha_gamming</span>
                                             <span>MuhammedIbrahim35</span>
-                                            <span>MitKenji1240</span>
                                             <span>frisco340</span>
                                         </div>
                                     </div>
@@ -306,7 +306,17 @@
                 </div>
                 <h3>silly_facehere</h3>
                 <span class="role" style="color: #e74c3c;">Developer</span>
-                <p>Modeling & Development. <strong style="color: #e74c3c;">Pengangguran</strong></p>
+                <p>Modeling & Development.<strong style="color: #e74c3c;">Pengangguran</strong></p>
+            </div>
+
+            <div class="team-card">
+                <div class="member-avatar">
+                    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-007EC2E1255CAE223B5D7685AC94EE3C-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Avatar Scripter">
+                    <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
+                </div>
+                <h3>MitKenji1240</h3>
+                <span class="role">Developer</span>
+                <p>Modeling & Development.</p>
             </div>
 
             <div class="team-card">
@@ -391,16 +401,6 @@
 
             <div class="team-card">
                 <div class="member-avatar">
-                    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-007EC2E1255CAE223B5D7685AC94EE3C-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Avatar Scripter">
-                    <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
-                </div>
-                <h3>MitKenji1240</h3>
-                <span class="role">Staff</span>
-                <p>in-game staff</p>
-            </div>
-
-            <div class="team-card">
-                <div class="member-avatar">
                     <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-D7EC9AABF134E5C09A3B80D7E8FD0A87-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="Avatar Scripter">
                     <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
                 </div>
@@ -430,10 +430,13 @@
         const navList = document.querySelector('nav ul');
 
         mobileMenu.addEventListener('click', () => {
+            // Toggle class untuk animasi hamburger
             mobileMenu.classList.toggle('is-active');
+            // Toggle class untuk memunculkan menu
             navList.classList.toggle('active');
         });
 
+        // Menutup menu saat salah satu link diklik (agar tidak menutupi layar)
         document.querySelectorAll('nav ul li a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('is-active');
